@@ -1,0 +1,54 @@
+import qupath.lib.gui.scripting.QPEx
+import javafx.application.Platform
+import qupath.lib.common.GeneralTools
+
+// 1. Get the current image entry (QuPath handles iteration in project mode)
+def entry = getProjectEntry()
+if (entry == null) {
+    print "No image entry found. Are you running this as a project script?"
+    return
+}
+
+// 2. Read image data
+def imageData = entry.readImageData()
+
+// 3. Use Platform.runLater to set the viewer image data + overlay update together
+Platform.runLater {
+    getCurrentViewer().setImageData(imageData)
+
+    setImageType('BRIGHTFIELD_H_E')
+    setColorDeconvolutionStains('{"Name" : "H&E default", "Stain 1" : "Hematoxylin", "Values 1" : "0.65111 0.70119 0.29049", "Stain 2" : "Eosin", "Values 2" : "0.2159 0.8012 0.5581", "Background" : " 255 255 255"}')
+    createFullImageAnnotation(true)
+    runPlugin('qupath.imagej.detect.cells.WatershedCellDetection', '{"detectionImageBrightfield":"Hematoxylin OD","backgroundByReconstruction":true,"backgroundRadius":10.0,"medianRadius":0.0,"sigma":3.0,"minArea":10.0,"maxArea":1000.0,"threshold":0.15,"maxBackground":2.0,"watershedPostProcess":true,"cellExpansion":0.0,"includeNuclei":true,"smoothBoundaries":true,"makeMeasurements":true}')
+
+    def detections = getDetectionObjects()
+    for (d in detections) {
+        d.setColor(0xFFFFFF) // White
+    }
+    fireHierarchyUpdate()
+
+    getCurrentViewer().getOverlayOptions().setFillDetections(true)
+}
+
+// 4. Export must wait a bit to ensure GUI has time to update
+sleep(12000)
+
+// Replace with your own desired output path
+def outputDir = new File("C:/Users/Abhishek/Desktop/QuPath_Exports/15740-040-masked")
+outputDir.mkdirs()
+
+def server = imageData.getServer()
+def originalName = GeneralTools.stripExtension(server.getMetadata().getName())
+def outputName = originalName + "_filled.png"
+def outputPath = buildFilePath(outputDir.getAbsolutePath(), outputName)
+
+try {
+    writeRenderedImage(getCurrentViewer(), outputPath)
+    println "Success! Image saved to: " + outputPath
+} catch (Exception e) {
+    println "Failed to save image: " + e.getMessage()
+    println "Try these alternatives:"
+    println "1. Use a simpler path like 'C:/temp/export.png'"
+    println "2. Check write permissions"
+    println "3. Make sure the viewer is fully rendered before export"
+}

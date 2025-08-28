@@ -1,0 +1,15 @@
+DBSCAN Clustering Results for 15740-039-masked-tile-predictions
+==================================================
+
+Total tiles processed: 984
+Tiles with valid coordinates: 984
+Number of clusters identified: 6
+Noise points (cluster = -1): 0
+
+Cluster sizes:
+  Cluster 0: 250 tiles
+  Cluster 1: 125 tiles
+  Cluster 2: 117 tiles
+  Cluster 3: 127 tiles
+  Cluster 4: 249 tiles
+  Cluster 5: 116 tiles

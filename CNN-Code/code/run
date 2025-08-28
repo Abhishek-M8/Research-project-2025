@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+set -ex
+
+# This is the master script for the capsule. When you click "Reproducible Run", the code in this file will execute.
+
+# Use this to run individual notbooks
+#
+# jupyter nbconvert \
+# 	--to 'html' \
+# 	--ExecutePreprocessor.allow_errors=True \
+# 	--ExecutePreprocessor.timeout=-1 \
+# 	--FilesWriter.build_directory=../results \
+# 	--execute 2_analysis_mouse_training_1.ipynb
+
+# The previous version of this file was commented-out and follows below:
+#
+jupyter nbconvert \
+	--to 'html' \
+	--ExecutePreprocessor.allow_errors=True \
+	--ExecutePreprocessor.timeout=-1 \
+	--FilesWriter.build_directory=../results \
+	--execute 2_analysis_mouse_training_1.ipynb
+
+jupyter nbconvert \
+	--to 'html' \
+	--ExecutePreprocessor.allow_errors=True \
+	--ExecutePreprocessor.timeout=-1 \
+	--FilesWriter.build_directory=../results \
+	--execute 5a_analysis_TCGA_training_1.ipynb
+
+jupyter nbconvert \
+	--to 'html' \
+	--ExecutePreprocessor.allow_errors=True \
+	--ExecutePreprocessor.timeout=-1 \
+	--FilesWriter.build_directory=../results \
+	--execute 5b_analysis_TCGA_training_1.ipynb
+
+jupyter nbconvert \
+	--to 'html' \
+	--ExecutePreprocessor.allow_errors=True \
+	--ExecutePreprocessor.timeout=-1 \
+	--FilesWriter.build_directory=../results \
+	--execute 5c_analysis_TCGA_training_1_confidence_curves.ipynb

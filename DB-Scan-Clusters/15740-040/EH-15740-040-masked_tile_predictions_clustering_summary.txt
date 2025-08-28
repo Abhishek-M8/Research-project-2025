@@ -1,0 +1,13 @@
+DBSCAN Clustering Results for EH-15740-040-masked_tile_predictions
+==================================================
+
+Total tiles processed: 46
+Tiles with valid coordinates: 46
+Number of clusters identified: 3
+Noise points (cluster = -1): 1
+
+Cluster sizes:
+  Cluster -1: 1 tiles
+  Cluster 0: 16 tiles
+  Cluster 1: 14 tiles
+  Cluster 2: 15 tiles

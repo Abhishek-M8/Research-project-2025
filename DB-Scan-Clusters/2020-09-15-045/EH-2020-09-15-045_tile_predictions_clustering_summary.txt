@@ -1,0 +1,14 @@
+DBSCAN Clustering Results for EH-2020-09-15-045_tile_predictions
+==================================================
+
+Total tiles processed: 362
+Tiles with valid coordinates: 362
+Number of clusters identified: 4
+Noise points (cluster = -1): 4
+
+Cluster sizes:
+  Cluster -1: 4 tiles
+  Cluster 0: 198 tiles
+  Cluster 1: 40 tiles
+  Cluster 2: 41 tiles
+  Cluster 3: 79 tiles

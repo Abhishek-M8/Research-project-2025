@@ -1,0 +1,14 @@
+Classification Report:
+              precision    recall  f1-score   support
+
+         CBT       0.00      0.00      0.00        10
+        CBTA       0.00      0.00      0.00        67
+        CBTP       0.06      0.66      0.10        59
+        CBT3       0.00      0.00      0.00        13
+       CBTPA       0.30      0.07      0.11        88
+       CBTP3       0.55      0.07      0.13       484
+Unclassified       0.28      0.21      0.24       263
+
+    accuracy                           0.14       984
+   macro avg       0.17      0.14      0.08       984
+weighted avg       0.38      0.14      0.14       984
